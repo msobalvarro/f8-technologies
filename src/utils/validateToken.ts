@@ -1,28 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { JwtPayload, verify } from 'jsonwebtoken'
+import { JwtPayload, verify, sign } from 'jsonwebtoken'
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key'
 
-export function validateToken(handler: (req: NextApiRequest, res: NextApiResponse) => void) {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    const authHeader = req.headers.authorization
+export function validateToken(authToken: string): JwtPayload | string {
+  const token: string | JwtPayload = authToken.split(' ')[1]
+  const decoded: JwtPayload | string = verify(token, SECRET_KEY) as JwtPayload
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new Error('Token is required')
-    }
+  return decoded
+}
 
-    const token: string | JwtPayload = authHeader.split(' ')[1]
-
-    try {
-      const decoded: JwtPayload | string = verify(token, SECRET_KEY) as JwtPayload
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (req as any).user = decoded
-
-      // Llama al handler original
-      return handler(req, res)
-    } catch (error) {
-      return res.status(401).json(error)
-    }
-  }
+export function generateToken(data: object): string {
+  return sign(data, SECRET_KEY, { expiresIn: '24h' })
 }
