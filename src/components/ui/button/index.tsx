@@ -3,16 +3,20 @@ import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
-  type: 'primary' | 'secondary'
+  type: 'primary' | 'secondary' | 'green' | 'purple' | 'pink' | 'orange'
   className?: string
 }
 
 export const UiButton = ({ children, type, className }: Props) => {
   return <button className={`
+    transition-all
     ${clsx({
-    'rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-gray-100 dark:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5': type === 'primary',
-    'rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44': type === 'secondary'
-  })}
-    ${className}
-  `}>{children}</button>
+    'text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2': type === 'primary',
+    'text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2': type === 'secondary',
+    'text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2': type === 'green',
+    'text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2': type === 'purple',
+    'text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2': type === 'pink',
+  })} ${className}`}>
+    {children}
+  </button>
 }
