@@ -33,8 +33,6 @@ export default function Home() {
             href='/'
           />
         </article>
-      {/* <UiLayout>
-      </UiLayout> */}
     </UiLayout>
   )
 }
