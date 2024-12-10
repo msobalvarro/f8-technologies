@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+export const gradientNavbar ='bg-gradient-to-r from-sky-700 to-cyan-600'
+
 export const NavbarUi = () => {
   return (
-    <nav className='w-full flex items-center justify-between py-4 px-8 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%'>
+    <nav className={`w-full flex items-center justify-between py-4 px-8 ${gradientNavbar}`}>
       <figure>
         <Image width={200} height={100} alt='logo' src='/logo/F8_Horizontal_Logo.png' />
       </figure>

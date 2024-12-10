@@ -1,8 +1,8 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
-import { InputField } from '../inputField'
 import phoneCodes from '@/utils/phoneCountries.json'
+import { FormEvent, useState } from 'react'
+import { inputClassNames, InputField } from '../inputField'
 import { UiButton } from '../ui/button'
 import { FormContactState } from '@/utils/interfaces'
 import { useValidation } from '@/hooks'
@@ -17,45 +17,64 @@ export const FormContact = () => {
     phoneNumber: '',
   })
 
-
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
 
   return (
-    <form onSubmit={submit} className='flex flex-col gap-4'>
-      <InputField inputProps={{ name: 'fullName', placeholder: 'Nombre Completo' }} />
+    <form onSubmit={submit} className='flex flex-col gap-4 rounded'>
+      <label>
+        <span className='text-sm'>Nombre Completo</span>
+        <InputField
+          className='w-full'
+          inputProps={{
+            name: 'fullName',
+            placeholder: 'Nombre Completo'
+          }} />
+      </label>
 
       <div className='flex gap-4'>
-        <InputField
-          className='flex-1'
-          inputProps={{
-            name: 'email',
-            placeholder: 'Correo Electrónico'
-          }} />
-
-
-        <div className='flex gap-1'>
-          <select className='outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-            {phoneCodes.map(phoneCodeItem => (
-              <option value={phoneCodeItem.code} key={crypto.randomUUID()}>
-                {phoneCodeItem.emoji} ({phoneCodeItem.dial_code})
-              </option>
-            ))}
-          </select>
-
+        <label className='flex-1'>
+          <span className='text-sm'>Correo Electrónico</span>
           <InputField
-            className='flex-1'
+            className='w-full'
             inputProps={{
-              name: 'phone',
-              placeholder: 'Número Telefónico',
-              type: 'tel',
-              onChange: ({ currentTarget }) => validateNumber(currentTarget.value) && setDataForm({ ...dataForm, phoneNumber: currentTarget.value })
+              name: 'email',
+              placeholder: 'Correo Electrónico'
             }} />
-        </div>
+        </label>
+
+        <label className='flex-1'>
+          <span className='text-sm'>Número telefónico</span>
+          <div className='flex gap-2'>
+            <select className={`${inputClassNames}`}>
+              {phoneCodes.map(phoneCodeItem => (
+                <option value={phoneCodeItem.code} key={crypto.randomUUID()}>
+                  {phoneCodeItem.emoji} ({phoneCodeItem.dial_code})
+                </option>
+              ))}
+            </select>
+
+            <InputField
+              className='flex-1'
+              inputProps={{
+                name: 'phone',
+                placeholder: 'Número Telefónico',
+                type: 'tel',
+                onChange: ({ currentTarget }) => validateNumber(currentTarget.value) && setDataForm({ ...dataForm, phoneNumber: currentTarget.value })
+              }} />
+          </div>
+        </label>
+
       </div>
 
-      <textarea placeholder='Mensaje' className='outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'></textarea>
+      <label>
+        <span className='text-sm'>Mensaje</span>
+        <textarea
+          rows={6}
+          placeholder='Escriba un Mensaje, indique su cotizacion o duda'
+          className={`w-full ${inputClassNames}`} />
+      </label>
 
       <UiButton type='primary'>Enviar Mensaje</UiButton>
     </form>

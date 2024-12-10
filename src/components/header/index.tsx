@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import { UiButton } from '../ui/button'
+import { gradientNavbar } from '../navbar'
 
 export const HeaderMain = () => {
   return (
-    <section className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% w-full p-10 min-h-80 flex flex-col gap-10'>
+    <section className={`w-full p-10 min-h-80 flex flex-col gap-10 ${gradientNavbar}`}>
       <div className='flex flex-col text-center gap-8 items-center'>
         <Image
           src='/logo/logo.png'
