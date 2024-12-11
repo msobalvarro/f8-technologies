@@ -14,7 +14,7 @@ interface Props {
 
 export const CardItem = (props: Props) => {
   return (
-    <div className='bg-white hover:scale-105 transition-all border border-gray-200 rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div className='bg-white hover:shadow-xl transition-all border border-gray-200 rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700'>
       <Image
         height={0}
         width={0}
