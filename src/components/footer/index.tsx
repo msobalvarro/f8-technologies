@@ -9,15 +9,15 @@ export const Footer = () => {
           src='/logo/logo.png'
           width={0}
           height={0}
-          sizes='128px'
+          sizes='86px'
           style={{
-            width: '128px',
+            width: '86px',
             height: 'auto',
           }}
           alt='logo' />
       </figure>
 
-      <div className='flex items-center gap-8'>
+      <div className='flex items-center md:gap-8 sm:text-sm sm:gap-4 xs:text-sm xs:gap-4'>
         <p>F8 Technologies {new Date().getFullYear()}</p>
 
         <p>Todos los derechos reservados</p>

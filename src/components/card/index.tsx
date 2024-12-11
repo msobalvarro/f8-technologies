@@ -1,5 +1,5 @@
-import { BsArrowRight } from 'react-icons/bs'
-import Link from 'next/link'
+
+
 import Image from 'next/image'
 import { UiButton } from '../ui/button'
 
@@ -14,7 +14,7 @@ interface Props {
 
 export const CardItem = (props: Props) => {
   return (
-    <div className='bg-white hover:shadow-xl transition-all border border-gray-200 rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div className='bg-white transition-all border border-gray-200 rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700'>
       <Image
         height={0}
         width={0}

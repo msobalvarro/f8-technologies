@@ -16,7 +16,7 @@ export default function Home() {
         src='/banner/art-banner-2.png'
         alt='baner' />
 
-      <article className='grid grid-cols-2 gap-10 p-12 w-full'>
+      <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
         <CardItem
           title='Cámara IP Fish Eye 5MP'
           description='La cámara IP Fish Eye 5MP es un dispositivo avanzado de seguridad con un diseño panorámico que ofrece una visión de 360 grados. Su sensor de 5 megapíxeles garantiza imágenes nítidas y detalladas tanto de día como de noche. Gracias a su tecnología Starlight, proporciona una excelente visión nocturna con una claridad excepcional en condiciones de baja iluminación, cubriendo hasta 10 metros de distancia.'
