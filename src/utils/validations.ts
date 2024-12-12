@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const newProductValidation = z.object({
+export const createAndUpdateProductValidation = z.object({
   name: z.string({
     message: 'Product name is required (min 3 characters)'
   }).min(3),
