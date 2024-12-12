@@ -1,10 +1,10 @@
 import { dbConnection } from '@/database'
 import { productModel } from '@/models/products'
 import { ProductsPropierties } from '@/utils/interfaces'
-import { NextResponse } from 'next/server'
-import { connection } from 'mongoose'
-import { ZodError } from 'zod'
+import { NextRequest, NextResponse } from 'next/server'
+import { connection, disconnect } from 'mongoose'
 import { newProductValidation } from '@/utils/validations'
+import { ZodError } from 'zod'
 
 export async function GET() {
   try {
@@ -19,14 +19,25 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const data = newProductValidation.parse(request.body)
-    return NextResponse.json(data)
+    const params: ProductsPropierties = await request.json()
+    const data = newProductValidation.parse(params)
+    await dbConnection()
+
+    const newProduct = await productModel.create(data)
+    return NextResponse.json(newProduct)
   } catch (error) {
     if (error instanceof ZodError) {
-      // Enviar errores de validación
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({
+        error: error.issues[0].message || error
+      }, {
+        status: 500
+      })
+    } else {
+      return NextResponse.json({ error }, { status: 500 })
     }
+  } finally {
+    await disconnect()
   }
 }
