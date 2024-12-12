@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 export default function Products() {
   return (
-    <UiLayout addClassName='p-10'>
-      <div className='flex flex-col items-center gap-2 text-center'>
+    <UiLayout>
+      <div className='flex flex-col items-center gap-2 text-center p-12'>
         <Image
           src='/logo/logo.png'
           width={0}
@@ -39,6 +39,17 @@ export default function Products() {
           textButton='Cotizar'
           href='/'
         />
+      </article>
+
+      <Image
+        width={0}
+        height={0}
+        sizes='100vw'
+        style={{ width: '100%' }}
+        src='/banner/art-banner.png'
+        alt='baner' />
+
+      <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
 
         <CardItem
           title='Punto de acceso wifi ubiquiti'

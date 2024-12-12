@@ -47,7 +47,7 @@ export default function Home() {
         height={0}
         sizes='100vw'
         style={{ width: '100%' }}
-        src='/banner/art-banner.png'
+        src='/banner/art-banner-3.png'
         alt='baner' />
 
     </UiLayout>
