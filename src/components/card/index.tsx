@@ -14,7 +14,7 @@ interface Props {
 
 export const CardItem = (props: Props) => {
   return (
-    <div className='bg-white transition-all border border-gray-200 rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div className='bg-white transition-all border-2 border-gray-200 hover:border-slate-500 rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:border-gray-700'>
       <Image
         height={0}
         width={0}
@@ -24,7 +24,6 @@ export const CardItem = (props: Props) => {
           height: '512px',
           objectFit: 'cover',
         }}
-        // className='w-100'
         src={props.imageUrl}
         alt='image' />
 

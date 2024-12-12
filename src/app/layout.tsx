@@ -15,9 +15,8 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <NavbarUi />
 
         {children}
+        <Footer />
       </body>
-
-      <Footer />
     </html>
   )
 }

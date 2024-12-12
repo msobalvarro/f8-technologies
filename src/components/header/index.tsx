@@ -24,10 +24,10 @@ export const HeaderMain = () => {
         </p>
 
 
-        <div className='flex'>
+        {/* <div className='flex'>
           <UiButton type='purple' className='self-center'>Cotiza tus Servicios</UiButton>
           <UiButton type='pink' className='self-center'>Contactanos</UiButton>
-        </div>
+        </div> */}
       </div>
     </section>
   )

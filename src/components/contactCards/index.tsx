@@ -1,7 +1,7 @@
 import { IoLogoWhatsapp, IoMdMail } from 'react-icons/io'
 import { IoCall } from 'react-icons/io5'
 
-const itemClasess = 'border border-2 border-slate-500 hover:border-slate-700 flex flex-1 flex-col items-center gap-3 bg-gray-800 rounded-lg p-4'
+const itemClasess = 'border border-2 border-2 border-slate-700 hover:border-slate-500 flex flex-1 flex-col items-center gap-3 bg-gray-800 rounded-lg p-4'
 
 export const ContactCard = () => {
   return (
