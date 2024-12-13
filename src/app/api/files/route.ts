@@ -30,8 +30,7 @@ export async function POST(request: NextRequest) {
 
     // write file
     await writeFile(
-      path.join(
-        process.cwd(), `${uploadDir}/${fileName}`),
+      path.join(process.cwd(), `${uploadDir}/${fileName}`),
       buffer
     )
 

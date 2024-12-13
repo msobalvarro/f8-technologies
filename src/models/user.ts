@@ -1,5 +1,5 @@
 import { UsersPropierties } from '@/utils/interfaces';
-import { model, Schema } from 'mongoose';
+import { model, models, Schema } from 'mongoose';
 
 const user = new Schema<UsersPropierties>(
   {
@@ -9,9 +9,9 @@ const user = new Schema<UsersPropierties>(
   },
   {
     timestamps: true,
-    versionKey: true
+    versionKey: false
   }
 )
 
-export const usersModel = model('user', user)
+export const usersModel =  models?.user|| model('user', user)
 

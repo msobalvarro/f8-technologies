@@ -19,3 +19,14 @@ export const createAndUpdateProductValidation = z.object({
     }
   )
 })
+
+export const createUserValidation = z.object({
+  name: z.string({ message: 'name is required' }),
+  username: z.string({ message: 'username is required' }),
+  password: z.string({ message: 'password is required' }),
+})
+
+export const loginValidation = z.object({
+  username: z.string({ message: 'username is required' }),
+  password: z.string({ message: 'password is required' }),
+})

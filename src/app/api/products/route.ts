@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { connection, disconnect, Types } from 'mongoose'
 import { createAndUpdateProductValidation } from '@/utils/validations'
 import { ZodError } from 'zod'
+import { validateErrorResponse } from '@/utils/responseError'
 
 export async function GET() {
   try {
@@ -32,15 +33,7 @@ export async function POST(request: NextRequest) {
     const newProduct = await productModel.create(data)
     return NextResponse.json(newProduct)
   } catch (error) {
-    if (error instanceof ZodError) {
-      return NextResponse.json({
-        error: error.issues[0].message || error
-      }, {
-        status: 500
-      })
-    } else {
-      return NextResponse.json({ error }, { status: 500 })
-    }
+    return validateErrorResponse(error)
   } finally {
     await disconnect()
   }
@@ -56,15 +49,7 @@ export async function DELETE(request: NextRequest) {
     const deleted = await productModel.deleteOne({ _id: params.id })
     return NextResponse.json(deleted)
   } catch (error) {
-    if (error instanceof ZodError) {
-      return NextResponse.json({
-        error: error.issues[0].message || error
-      }, {
-        status: 500
-      })
-    } else {
-      return NextResponse.json({ error }, { status: 500 })
-    }
+    return validateErrorResponse(error)
   } finally {
     await disconnect()
   }
@@ -89,15 +74,7 @@ export async function PUT(request: NextRequest) {
     )
     return NextResponse.json(productUpdated)
   } catch (error) {
-    if (error instanceof ZodError) {
-      return NextResponse.json({
-        error: error.issues[0].message || error
-      }, {
-        status: 500
-      })
-    } else {
-      return NextResponse.json({ error }, { status: 500 })
-    }
+    return validateErrorResponse(error)
   } finally {
     await disconnect()
   }
