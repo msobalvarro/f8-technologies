@@ -10,7 +10,7 @@ export const NavbarUi = () => {
         <Image width={200} height={100} alt='logo' src='/logo/F8_Horizontal_Logo.png' />
       </figure>
 
-      <div className='flex gap-6 text-lg'>
+      <div className='flex gap-6'>
         <Link className='hover:text-white/50' href='/'>Inicio</Link>
         <Link className='hover:text-white/50' href='/products'>Productos</Link>
         <Link className='hover:text-white/50' href='/services'>Servicios</Link>

@@ -1,6 +1,10 @@
 import { dbConnection } from '@/database'
 import { productModel } from '@/models/products'
-import { DeleteProductProps, ProductsPropierties, UpdateProductProps } from '@/utils/interfaces'
+import {
+  DeleteProductProps,
+  ProductsPropierties,
+  UpdateProductProps
+} from '@/utils/interfaces'
 import { NextRequest, NextResponse } from 'next/server'
 import { connection, disconnect, Types } from 'mongoose'
 import { createAndUpdateProductValidation } from '@/utils/validations'
