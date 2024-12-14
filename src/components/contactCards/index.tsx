@@ -1,3 +1,5 @@
+'use client'
+
 import { IoLogoWhatsapp, IoMdMail } from 'react-icons/io'
 import { IoCall } from 'react-icons/io5'
 

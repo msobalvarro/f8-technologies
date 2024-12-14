@@ -1,8 +1,25 @@
-import { CardItem } from '@/components/card';
+'use client'
+
+import { CardItem } from '@/components/card'
 import { UiLayout } from '@/components/ui/layout'
-import Image from 'next/image';
+import { fetchData } from '@/utils/fetch'
+import { ProductsPropierties } from '@/utils/interfaces'
+import { useActionState, useEffect } from 'react'
+import Image from 'next/image'
+
+const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await fetchData('/products')
 
 export default function Products() {
+
+  // ... rest of the component
+  const [response, fetchAction, isLoading] = useActionState<ProductsPropierties[]>(fetchDataAsync, [])
+
+  useEffect(() => {
+    fetchAction()
+  }, [fetchAction])
+
+  console.log(response)
+
   return (
     <UiLayout>
       <div className='flex flex-col items-center gap-2 text-center p-12'>
@@ -22,6 +39,8 @@ export default function Products() {
           Somos importadores de marcas oficiales, nuestra calidad en nuestro productos nos define como empresa
         </p>
       </div>
+
+      {isLoading && <p>Loading</p>}
 
       <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
         <CardItem

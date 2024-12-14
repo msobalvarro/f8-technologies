@@ -1,5 +1,5 @@
-import { UiLayout } from '@/components/ui/layout';
-import Image from 'next/image';
+import { UiLayout } from '@/components/ui/layout'
+import Image from 'next/image'
 
 export default function Services() {
   return (

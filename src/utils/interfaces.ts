@@ -31,3 +31,7 @@ export interface LoginProps {
   username: string
   password: string
 }
+
+export interface PropsUseAxios {
+  endpoint: string
+}

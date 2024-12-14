@@ -3,7 +3,7 @@ import { existsSync, mkdirSync } from 'fs'
 import { writeFile } from 'fs/promises'
 import path from 'path'
 
-const uploadDir = './uploads'
+const uploadDir = <string>process.env.PUBLIC_FOLDER
 
 export async function POST(request: NextRequest) {
   try {
