@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 export const fetchData = async (endpoint = '') => {
   try {
-    const response = await axios.get<T>(`/api/${endpoint}`)
+    const response = await axios.get(`/api/${endpoint}`)
     return response.data
   } catch (err) {
     if (err instanceof AxiosError) {

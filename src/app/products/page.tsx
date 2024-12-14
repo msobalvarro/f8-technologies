@@ -5,13 +5,14 @@ import { UiLayout } from '@/components/ui/layout'
 import { fetchData } from '@/utils/fetch'
 import { ProductsPropierties } from '@/utils/interfaces'
 import { useActionState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
 
-const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await fetchData('/products')
+const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await toast.promise(fetchData('/products'), {
+  pending: 'Obteniendo Productos'
+})
 
 export default function Products() {
-
-  // ... rest of the component
   const [response, fetchAction, isLoading] = useActionState<ProductsPropierties[]>(fetchDataAsync, [])
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function Products() {
       </div>
 
       {isLoading && <p>Loading</p>}
-
+      {/* 
       <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
         <CardItem
           title='Cámara IP Fish Eye 5MP'
@@ -58,19 +59,22 @@ export default function Products() {
           textButton='Cotizar'
           href='/'
         />
-      </article>
-
-      <Image
-        width={0}
-        height={0}
-        sizes='100vw'
-        style={{ width: '100%' }}
-        src='/banner/art-banner.png'
-        alt='baner' />
+      </article> */}
 
       <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
+        {response.map(product => (
+          <CardItem
+            key={crypto.randomUUID()}
+            title={product.name}
+            description={product.description}
+            imageUrl={`/uploads/${product.images[0]}`}
+            textButton='Cotizar'
+            href='/'
+          />
 
-        <CardItem
+        ))}
+
+        {/* <CardItem
           title='Punto de acceso wifi ubiquiti'
           description='El punto de acceso WiFi Ubiquiti con tecnología WiFi 6 es una solución avanzada diseñada para ofrecer conexiones inalámbricas de alta velocidad, mayor capacidad y una cobertura más amplia. Equipado con la última generación WiFi 6 (802.11ax), este dispositivo es ideal para hogares, oficinas y espacios comerciales que demandan una red confiable y eficiente.'
           imageUrl='/card/imageCard3.jpg'
@@ -84,8 +88,16 @@ export default function Products() {
           imageUrl='/card/imageCard4.jpg'
           textButton='Cotizar'
           href='/'
-        />
+        /> */}
       </article>
+
+      <Image
+        width={0}
+        height={0}
+        sizes='100vw'
+        style={{ width: '100%' }}
+        src='/banner/art-banner.png'
+        alt='baner' />
     </UiLayout>
   )
 }

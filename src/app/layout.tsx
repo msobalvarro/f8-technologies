@@ -1,7 +1,9 @@
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 import type { Metadata } from 'next'
 import { NavbarUi } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import { ToastContainer } from 'react-toastify'
 
 export const metadata: Metadata = {
   title: 'F8 Technologies',
@@ -16,6 +18,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 
         {children}
         <Footer />
+        <ToastContainer autoClose={5000} />
       </body>
     </html>
   )
