@@ -18,7 +18,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 
         {children}
         <Footer />
-        <ToastContainer autoClose={5000} />
+        <ToastContainer theme='dark' autoClose={5000} />
       </body>
     </html>
   )

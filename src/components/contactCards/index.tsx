@@ -10,7 +10,7 @@ export const ContactCard = () => {
     <div className='flex gap-8'>
       <a href='#' className={itemClasess}>
         <span className='bg-white rounded-full p-4'>
-          <IoMdMail className='text-3xl text-rose-600' />
+          <IoMdMail className='text-3xl text-gray-500' />
         </span>
 
         <p className='text-xl'>Escribenos</p>
@@ -34,7 +34,7 @@ export const ContactCard = () => {
         </span>
 
         <p className='text-xl'>WhatsApp</p>
-        <p className='text-sky-700'>+(505) 8242 4540</p>
+        <p className='text-sky-700'>8242 4540</p>
       </a>
     </div>
   )
