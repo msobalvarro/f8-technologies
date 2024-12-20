@@ -8,7 +8,6 @@ import {
 import { NextRequest, NextResponse } from 'next/server'
 import { connection, disconnect, Types } from 'mongoose'
 import { createAndUpdateProductValidation } from '@/utils/validations'
-import { ZodError } from 'zod'
 import { validateErrorResponse } from '@/utils/responseError'
 
 export async function GET() {
