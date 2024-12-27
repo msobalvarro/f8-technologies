@@ -7,9 +7,6 @@ export const createAndUpdateProductValidation = z.object({
   description: z.string({
     message: 'Product description is required (min 3 characters)'
   }).min(3),
-  unitPrice: z.number({
-    message: 'unit price is required'
-  }),
   images: z.array(
     z.string({
       message: 'image param must be string'
@@ -17,7 +14,8 @@ export const createAndUpdateProductValidation = z.object({
     {
       message: 'images is required'
     }
-  )
+  ),
+  archived: z.boolean({message: 'archived is required' }),
 })
 
 export const createUserValidation = z.object({

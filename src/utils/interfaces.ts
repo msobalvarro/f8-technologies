@@ -1,5 +1,3 @@
-import { Types } from 'mongoose'
-
 export interface FormContactState {
   fullName: string
   email: string
@@ -10,8 +8,8 @@ export interface FormContactState {
 export interface ProductsPropierties {
   name: string
   description: string
-  unitPrice: number
-  images: [string]
+  archived: boolean
+  images: string[]
 }
 
 export interface DeleteProductProps {
@@ -21,7 +19,6 @@ export interface DeleteProductProps {
 export type UpdateProductProps = DeleteProductProps & ProductsPropierties
 
 export interface UsersPropierties {
-  // _id: Types.ObjectId
   name: string
   username: string
   password: string

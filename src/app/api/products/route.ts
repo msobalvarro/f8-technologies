@@ -10,12 +10,18 @@ import { connection, disconnect, Types } from 'mongoose'
 import { createAndUpdateProductValidation } from '@/utils/validations'
 import { validateErrorResponse } from '@/utils/responseError'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await dbConnection()
-    const products: ProductsPropierties[] = await productModel.find()
+    const id = request.nextUrl.searchParams.get('id')
 
-    return NextResponse.json(products, { status: 200 })
+    if (id) {
+      const product: ProductsPropierties | null = await productModel.findById(id)
+      return NextResponse.json(product, { status: 200 })
+    } else {
+      const products: ProductsPropierties[] = await productModel.find()
+      return NextResponse.json(products, { status: 200 })
+    }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 })
   } finally {
@@ -67,7 +73,7 @@ export async function PUT(request: NextRequest) {
       {
         description: data.description,
         name: data.name,
-        unitPrice: data.unitPrice,
+        archived: data.archived,
         images: data.images,
       }
     )

@@ -5,7 +5,7 @@ const product = new Schema<ProductsPropierties>(
   {
     description: { type: String, required: true },
     name: { type: String, required: true },
-    unitPrice: { type: Number, required: true },
+    archived: { type: Boolean, required: false, default: false },
     images: [String],
   },
   {
