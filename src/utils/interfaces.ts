@@ -32,3 +32,22 @@ export interface LoginProps {
 export interface PropsUseAxios {
   endpoint: string
 }
+
+export interface PreferencesProps {
+  emailContact: string
+  phoneContact: string
+  whatsapp: string
+}
+
+export interface PreferencesPropierties {
+  key: string
+  value: string
+}
+
+export interface DeletePreferencesProp {
+  _id: string
+}
+
+export interface UpdatePreferencesProp extends PreferencesPropierties {
+  _id: string
+}

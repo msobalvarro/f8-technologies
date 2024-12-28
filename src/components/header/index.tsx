@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { UiButton } from '../ui/button'
 import { gradientNavbar } from '../navbar'
 
 export const HeaderMain = () => {

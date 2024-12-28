@@ -1,9 +1,18 @@
+'use client'
+
 import { FormContact } from '@/components/contact'
 import { ContactCard } from '@/components/contactCards'
 import { UiLayout } from '@/components/ui/layout'
+import { fetcher } from '@/hooks'
+import { PreferencesPropierties } from '@/utils/interfaces'
+import { useMemo } from 'react'
+import useSWR from 'swr'
 import Image from 'next/image'
 
 export default function ContactView() {
+  const { data } = useSWR<PreferencesPropierties[]>('api/preferences', fetcher)
+  const memoizedPreference = useMemo(() => data, [data])
+
   return (
     <UiLayout addClassName='p-10'>
       <section className='p-10 rounded flex flex-col gap-8 bg-gray-800 shadow-xl'>
@@ -29,7 +38,7 @@ export default function ContactView() {
 
         <hr className='border-slate-100' />
 
-        <ContactCard />
+        {memoizedPreference && <ContactCard data={memoizedPreference} />}
       </section>
     </UiLayout>
   )

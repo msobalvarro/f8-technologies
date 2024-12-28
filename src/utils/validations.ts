@@ -28,3 +28,18 @@ export const loginValidation = z.object({
   username: z.string({ message: 'username is required' }),
   password: z.string({ message: 'password is required' }),
 })
+
+export const createPreferenceValidation = z.object({
+  key: z.string({ message: 'name preference is required' }),
+  value: z.string({ message: 'value preference is required' }),
+})
+
+export const deletePreferenceValidation = z.object({
+  _id: z.string({ message: 'id preference is required' }),
+})
+
+export const updatePreferenceValidation = z.object({
+  _id: z.string({ message: 'id preference is required' }),
+  key: z.string({ message: 'name preference is required' }),
+  value: z.string({ message: 'value preference is required' }),
+})

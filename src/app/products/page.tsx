@@ -1,13 +1,13 @@
 'use client'
 
-import {CardItem} from '@/components/card'
-import {UiLayout} from '@/components/ui/layout'
-import {fetchData} from '@/utils/fetch'
-import {ProductsPropierties} from '@/utils/interfaces'
-import {useActionState, useEffect} from 'react'
-import {toast} from 'react-toastify'
+import { CardItem } from '@/components/card'
+import { UiLayout } from '@/components/ui/layout'
+import { fetchData } from '@/utils/fetch'
+import { ProductsPropierties } from '@/utils/interfaces'
+import { useActionState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import Image from 'next/image'
-import {Skeleton} from '@mui/material'
+import { Skeleton } from '@mui/material'
 
 const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await toast.promise(fetchData('/products'), {
   pending: 'Obteniendo Productos'
@@ -32,7 +32,7 @@ export default function Products() {
             width: '128px',
             height: 'auto',
           }}
-          alt='logo'/>
+          alt='logo' />
 
         <h1 className='text-3xl'>Nuestros Productos</h1>
         <p className='text-gray-500'>
@@ -44,14 +44,14 @@ export default function Products() {
         width={0}
         height={0}
         sizes='100vw'
-        style={{width: '100%'}}
+        style={{ width: '100%' }}
         src='/banner/art-banner-3.png'
-        alt='baner'/>
+        alt='baner' />
 
       {isLoading && (
         <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
-          <Skeleton className='rounded-xl' height={512} variant='rectangular'/>
-          <Skeleton className='rounded-xl' height={512} variant='rectangular'/>
+          <Skeleton className='rounded-xl' height={512} variant='rectangular' />
+          <Skeleton className='rounded-xl' height={512} variant='rectangular' />
         </article>
       )}
 
@@ -90,9 +90,9 @@ export default function Products() {
         width={0}
         height={0}
         sizes='100vw'
-        style={{width: '100%'}}
+        style={{ width: '100%' }}
         src='/banner/art-banner.png'
-        alt='baner'/>
+        alt='baner' />
     </UiLayout>
   )
 }

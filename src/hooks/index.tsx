@@ -29,6 +29,12 @@ export const useValidation = () => {
   }
 }
 
+
+export const fetcher = async (...args) => {
+  const response = await fetch(...args)
+  return response.json()
+}
+
 export const useAxios = <T = unknown>({ endpoint }: PropsUseAxios) => {
   const [data, setData] = useState<T | null>(null)
   const [status, setStatus] = useState<number | null>(null)
@@ -66,4 +72,3 @@ export const useAxios = <T = unknown>({ endpoint }: PropsUseAxios) => {
 
   return { data, loading, error, status, refetch: fetchData }
 }
-

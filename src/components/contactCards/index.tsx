@@ -1,11 +1,16 @@
 'use client'
 
+import { PreferencesPropierties } from '@/utils/interfaces'
 import { IoLogoWhatsapp, IoMdMail } from 'react-icons/io'
 import { IoCall } from 'react-icons/io5'
 
 const itemClasess = 'border border-2 border-2 border-slate-700 hover:border-slate-500 flex flex-1 flex-col items-center gap-3 bg-gray-800 rounded-lg p-4'
 
-export const ContactCard = () => {
+interface Props {
+  data: PreferencesPropierties[]
+}
+
+export const ContactCard = ({ data }: Props) => {
   return (
     <div className='flex gap-8'>
       <a href='#' className={itemClasess}>
@@ -14,7 +19,7 @@ export const ContactCard = () => {
         </span>
 
         <p className='text-xl'>Escribenos</p>
-        <p className='text-sky-700'>info@f8technologies.com</p>
+        <p className='text-sky-700'>{data?.find(e => e.key === 'emailContact')?.value}</p>
       </a>
 
 
@@ -24,7 +29,7 @@ export const ContactCard = () => {
         </span>
 
         <p className='text-xl'>Llámanos</p>
-        <p className='text-sky-700'>+(505) 8242 4540</p>
+        <p className='text-sky-700'>{data?.find(e => e.key === 'phoneContact')?.value}</p>
       </a>
 
 
@@ -34,7 +39,7 @@ export const ContactCard = () => {
         </span>
 
         <p className='text-xl'>WhatsApp</p>
-        <p className='text-sky-700'>8242 4540</p>
+        <p className='text-sky-700'>{data?.find(e => e.key === 'whatsapp')?.value}</p>
       </a>
     </div>
   )
