@@ -12,4 +12,4 @@ const preferences = new Schema<PreferencesPropierties>(
   }
 )
 
-export const preferencesModel  = models?.products || model('preferences', preferences)
+export const preferencesModel  = models?.preferences || model('preferences', preferences)
