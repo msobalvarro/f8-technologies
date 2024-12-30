@@ -59,4 +59,5 @@ export interface MessagesPropierties {
   email: string
   phoneNumber: string
   message: string
+  archived: boolean
 }
