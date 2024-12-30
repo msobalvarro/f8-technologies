@@ -1,9 +1,17 @@
 import axios, { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 
-export const fetchData = async (endpoint = '') => {
+export const axiosInstance = axios.create({
+  baseURL: `/api`,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  },
+})
+
+export const fetchData = async (endpoint: string) => {
   try {
-    const response = await axios.get(`/api/${endpoint}`)
+    const response = await axiosInstance.get(endpoint)
     return response.data
   } catch (err) {
     if (err instanceof AxiosError) {

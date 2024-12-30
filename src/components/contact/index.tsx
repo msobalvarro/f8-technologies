@@ -6,20 +6,41 @@ import { inputClassNames, InputField } from '../inputField'
 import { UiButton } from '../ui/button'
 import { FormContactState } from '@/utils/interfaces'
 import { useValidation } from '@/hooks'
+import { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
+import { axiosInstance } from '@/utils/fetch'
+
+const defaultState: FormContactState = {
+  email: '',
+  company: '',
+  fullName: '',
+  message: '',
+  phoneNumber: '',
+}
 
 export const FormContact = () => {
   const { validateNumber } = useValidation()
+  const [loading, setLoading] = useState(false)
   const [phoneCode, setPhoneCode] = useState<string>('+505')
-  const [dataForm, setDataForm] = useState<FormContactState>({
-    email: '',
-    company: '',
-    fullName: '',
-    message: '',
-    phoneNumber: '',
-  })
+  const [dataForm, setDataForm] = useState<FormContactState>(defaultState)
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setLoading(true)
+
+    try {
+      await axiosInstance.post('/message', dataForm)
+      toast.success('El mensaje ha sido enviado correctamente.')
+      setDataForm(defaultState)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(String(error.response?.data))
+      } else {
+        toast.error(String(error))
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -30,6 +51,7 @@ export const FormContact = () => {
           <InputField
             className='w-full'
             inputProps={{
+              required: true,
               name: 'fullName',
               placeholder: 'Nombre Completo',
               value: dataForm.fullName,
@@ -62,6 +84,7 @@ export const FormContact = () => {
           <InputField
             className='w-full'
             inputProps={{
+              required: true,
               name: 'email',
               placeholder: 'Correo Electrónico',
               value: dataForm.email,
@@ -89,14 +112,12 @@ export const FormContact = () => {
             <InputField
               className='flex-1 disabled:bg-color-gray-100'
               inputProps={{
+                required: true,
                 name: 'phone',
                 placeholder: 'Número Telefónico',
                 type: 'tel',
                 value: dataForm.phoneNumber,
-                pattern: '[0-9]{10}',
                 title: 'Número telefónico deben tener 10 dígitos',
-                required: true,
-                // disabled:!phoneCode,
                 onChange: ({ currentTarget }) => validateNumber(currentTarget.value) && setDataForm({ ...dataForm, phoneNumber: currentTarget.value })
               }} />
           </div>
@@ -107,12 +128,17 @@ export const FormContact = () => {
       <label>
         <span className='text-sm'>Mensaje *</span>
         <textarea
+          required
+          value={dataForm.message}
+          onChange={({ currentTarget }) => setDataForm({ ...dataForm, message: currentTarget.value })}
           rows={6}
           placeholder='Escriba un Mensaje, indique su cotizacion o duda'
           className={`w-full ${inputClassNames}`} />
       </label>
 
-      <UiButton type='primary'>Enviar Mensaje</UiButton>
+      <UiButton disabled={loading} type='primary'>
+        {loading ? 'Cargando...' : 'Enviar Mensaje'}
+      </UiButton>
     </form>
   )
 }

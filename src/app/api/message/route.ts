@@ -4,6 +4,7 @@ import { connection } from 'mongoose'
 import { ArchiveMessageProp, MessagesPropierties } from '@/utils/interfaces'
 import { createMessage } from '@/utils/validations'
 import { messageModel } from '@/models/messages'
+import { ZodError } from 'zod'
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,12 +15,15 @@ export async function POST(request: NextRequest) {
     const newMessage = await messageModel.create(data)
     return NextResponse.json(newMessage, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+    if (error instanceof ZodError) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    } else {
+      return NextResponse.json({ error }, { status: 500 })
+    }
   } finally {
     await connection.close()
   }
 }
-
 
 export async function GET(request: NextRequest) {
   try {
