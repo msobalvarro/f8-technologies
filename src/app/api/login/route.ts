@@ -4,6 +4,7 @@ import { LoginProps } from '@/utils/interfaces'
 import { validateErrorResponse } from '@/utils/responseError'
 import { generateToken, newSha256 } from '@/utils/validateToken'
 import { loginValidation } from '@/utils/validations'
+import { connection } from 'mongoose'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
@@ -24,5 +25,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response, { status: 200 })
   } catch (error) {
     return validateErrorResponse(error)
+  } finally { 
+    await connection.close()
   }
 }
