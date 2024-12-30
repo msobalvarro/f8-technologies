@@ -15,7 +15,7 @@ export const createAndUpdateProductValidation = z.object({
       message: 'images is required'
     }
   ),
-  archived: z.boolean({message: 'archived is required' }),
+  archived: z.boolean({ message: 'archived is required' }),
 })
 
 export const createUserValidation = z.object({
@@ -42,4 +42,13 @@ export const updatePreferenceValidation = z.object({
   _id: z.string({ message: 'id preference is required' }),
   key: z.string({ message: 'name preference is required' }),
   value: z.string({ message: 'value preference is required' }),
+})
+
+
+
+export const createMessage = z.object({
+  fullName: z.string({ message: 'name is required' }),
+  phoneNumber: z.string({ message: 'phone number is required' }),
+  message: z.string({ message: 'name is required' }),
+  email: z.string({ message: 'email is required' }).email({ message: 'email format is not valid' }),
 })

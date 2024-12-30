@@ -2,8 +2,16 @@ import { dbConnection } from '@/database'
 import { NextRequest, NextResponse } from 'next/server'
 import { connection } from 'mongoose'
 import { preferencesModel } from '@/models/preferences'
-import { DeletePreferencesProp, PreferencesPropierties, UpdatePreferencesProp } from '@/utils/interfaces'
-import { createPreferenceValidation, deletePreferenceValidation, updatePreferenceValidation } from '@/utils/validations'
+import {
+  DeletePreferencesProp,
+  PreferencesPropierties,
+  UpdatePreferencesProp
+} from '@/utils/interfaces'
+import {
+  createPreferenceValidation,
+  deletePreferenceValidation,
+  updatePreferenceValidation
+} from '@/utils/validations'
 
 export async function GET() {
   try {

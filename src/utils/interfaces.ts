@@ -1,4 +1,5 @@
 export interface FormContactState {
+  company: string
   fullName: string
   email: string
   phoneNumber: string
@@ -50,4 +51,12 @@ export interface DeletePreferencesProp {
 
 export interface UpdatePreferencesProp extends PreferencesPropierties {
   _id: string
+}
+
+export interface MessagesPropierties {
+  fullName: string
+  company: string
+  email: string
+  phoneNumber: string
+  message: string
 }
