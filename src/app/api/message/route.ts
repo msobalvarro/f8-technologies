@@ -24,9 +24,9 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     await dbConnection()
-    const data = await messageModel.find({
-      archived: Boolean(request.nextUrl.searchParams.get('archived')),
-    }).sort({ createdAt: -1 })
+    const archived = request.nextUrl.searchParams.get('archived') === 'true'
+
+    const data = await messageModel.find({ archived }).sort({ createdAt: -1 })
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 })

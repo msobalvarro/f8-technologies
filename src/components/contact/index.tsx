@@ -18,8 +18,6 @@ export const FormContact = () => {
     phoneNumber: '',
   })
 
-  console.log(phoneCode)
-  
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
   }
