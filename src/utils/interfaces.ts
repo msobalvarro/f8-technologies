@@ -61,3 +61,7 @@ export interface MessagesPropierties {
   message: string
   archived: boolean
 }
+
+export interface ArchiveMessageProp {
+  _id: string
+}
