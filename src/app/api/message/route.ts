@@ -5,7 +5,6 @@ import { ArchiveMessageProp, MessagesPropierties } from '@/utils/interfaces'
 import { createMessage } from '@/utils/validations'
 import { messageModel } from '@/models/messages'
 import { ZodError } from 'zod'
-import { store } from '@/store'
 import { getSocket } from '@/utils/socket'
 
 export async function POST(request: NextRequest) {
@@ -15,6 +14,9 @@ export async function POST(request: NextRequest) {
 
     await dbConnection()
     const newMessage = await messageModel.create(data)
+
+    getSocket().emit('newMessage', newMessage)
+    
     return NextResponse.json(newMessage, { status: 200 })
   } catch (error) {
     if (error instanceof ZodError) {
@@ -30,17 +32,13 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     await dbConnection()
-    // const { sendMessage } = store.getState()
-    // await sendMessage({ data: 'message data' })
-
-    getSocket().emit('newMessage', { data: true })
 
     const archived = request.nextUrl.searchParams.get('archived') === 'true'
     const data = await messageModel.find({ archived }).sort({ createdAt: -1 })
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
     console.log(error)
-    
+
     return NextResponse.json({ error }, { status: 500 })
   } finally {
     await connection.close()
