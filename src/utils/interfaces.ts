@@ -65,3 +65,11 @@ export interface MessagesPropierties {
 export interface ArchiveMessageProp {
   _id: string
 }
+
+export interface ServicesPropierties { 
+  title: string
+  descriptions: string  
+  images: string[]
+  archived?: boolean
+}
+
