@@ -1,7 +1,7 @@
 import { ServicesPropierties } from '@/utils/interfaces'
-import { Schema } from 'mongoose'
+import { models, Schema, model } from 'mongoose'
 
-export const service = new Schema<ServicesPropierties>(
+export const services = new Schema<ServicesPropierties>(
   {
     title: { type: String, required: true },
     descriptions: { type: String, required: true }
@@ -11,3 +11,5 @@ export const service = new Schema<ServicesPropierties>(
     versionKey: false,
   },
 )
+
+export const servicesModel = models?.service || model('services', services)
