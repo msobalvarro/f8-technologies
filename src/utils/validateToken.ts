@@ -1,9 +1,9 @@
 import { JwtPayload, verify, sign } from 'jsonwebtoken'
-import { createHash } from 'crypto'
+import { createHash } from 'node:crypto'
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key'
 
-export function validateToken(authToken: string): JwtPayload | string {
+export function validateToken(authToken: string): JwtPayload | string {  
   const token: string | JwtPayload = authToken.split(' ')[1]
   const decoded: JwtPayload | string = verify(token, SECRET_KEY) as JwtPayload
 
