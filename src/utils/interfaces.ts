@@ -11,6 +11,7 @@ export interface ProductsPropierties {
   description: string
   archived: boolean
   images: string[]
+  pinned: boolean
 }
 
 export interface DeleteProductProps {
@@ -61,3 +62,16 @@ export interface MessagesPropierties {
   message: string
   archived: boolean
 }
+
+export interface ArchiveMessageProp {
+  _id: string
+}
+
+export interface ServicesPropierties { 
+  title: string
+  description: string  
+  images: string[]
+  archived?: boolean
+  pinned?: boolean
+}
+
