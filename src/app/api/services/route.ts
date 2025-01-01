@@ -1,7 +1,6 @@
 import { dbConnection } from '@/database'
 import {
   NewAndUpdateServiceProps,
-  ProductsPropierties,
   ServicesPropierties,
 } from '@/utils/interfaces'
 import { NextRequest, NextResponse } from 'next/server'
@@ -14,12 +13,11 @@ export async function GET(request: NextRequest) {
   try {
     await dbConnection()
     const id = request.nextUrl.searchParams.get('id')
-
     if (id) {
-      const product: ProductsPropierties | null = await servicesModel.findById(id)
+      const product: NewAndUpdateServiceProps | null = await servicesModel.findById(id)
       return NextResponse.json(product, { status: 200 })
     } else {
-      const products: ProductsPropierties[] = await servicesModel.find().sort({ createdAt: -1 })
+      const products: NewAndUpdateServiceProps[] = await servicesModel.find().sort({ createdAt: -1 })
       return NextResponse.json(products, { status: 200 })
     }
   } catch (error) {
