@@ -11,6 +11,7 @@ export interface ProductsPropierties {
   description: string
   archived: boolean
   images: string[]
+  pinned: boolean
 }
 
 export interface DeleteProductProps {

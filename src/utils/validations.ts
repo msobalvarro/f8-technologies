@@ -15,7 +15,7 @@ export const createAndUpdateProductValidation = z.object({
       message: 'images is required'
     }
   ),
-  archived: z.boolean({ message: 'archived is required' }),
+  pinned: z.boolean({ message: 'pinned is required' }),
 })
 
 export const createUserValidation = z.object({

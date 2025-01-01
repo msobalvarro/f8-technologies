@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
       const product: ProductsPropierties | null = await productModel.findById(id)
       return NextResponse.json(product, { status: 200 })
     } else {
-      const products: ProductsPropierties[] = await productModel.find()
+      const products: ProductsPropierties[] = await productModel.find().sort({ createdAt: -1 })
       return NextResponse.json(products, { status: 200 })
     }
   } catch (error) {
@@ -32,10 +32,10 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const params: ProductsPropierties = await request.json()
-    const data = createAndUpdateProductValidation.parse(params)
+    createAndUpdateProductValidation.parse(params)
     await dbConnection()
 
-    const newProduct = await productModel.create(data)
+    const newProduct = await productModel.create(params)
     return NextResponse.json(newProduct)
   } catch (error) {
     return validateErrorResponse(error)
@@ -46,12 +46,14 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const params: DeleteProductProps = await request.json()
-    if (!Types.ObjectId.isValid(params.id)) throw new Error('id is not a valid')
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    if (!id || !Types.ObjectId.isValid(id)) throw new Error('id is not a valid')
 
     await dbConnection()
 
-    const deleted = await productModel.deleteOne({ _id: params.id })
+    const deleted = await productModel.deleteOne({ _id: id })
     return NextResponse.json(deleted)
   } catch (error) {
     return validateErrorResponse(error)
@@ -73,7 +75,8 @@ export async function PUT(request: NextRequest) {
       {
         description: data.description,
         name: data.name,
-        archived: data.archived,
+        archived: params.archived,
+        pinned: params.pinned,
         images: data.images,
       }
     )
