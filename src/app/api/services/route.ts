@@ -1,9 +1,7 @@
 import { dbConnection } from '@/database'
-import { productModel } from '@/models/products'
 import {
-  ProductsPropierties,
+  NewAndUpdateServiceProps,
   ServicesPropierties,
-  UpdateProductProps
 } from '@/utils/interfaces'
 import { NextRequest, NextResponse } from 'next/server'
 import { connection, disconnect, Types } from 'mongoose'
@@ -15,12 +13,11 @@ export async function GET(request: NextRequest) {
   try {
     await dbConnection()
     const id = request.nextUrl.searchParams.get('id')
-
     if (id) {
-      const product: ProductsPropierties | null = await servicesModel.findById(id)
+      const product: NewAndUpdateServiceProps | null = await servicesModel.findById(id)
       return NextResponse.json(product, { status: 200 })
     } else {
-      const products: ProductsPropierties[] = await servicesModel.find().sort({ createdAt: -1 })
+      const products: NewAndUpdateServiceProps[] = await servicesModel.find().sort({ createdAt: -1 })
       return NextResponse.json(products, { status: 200 })
     }
   } catch (error) {
@@ -67,14 +64,12 @@ export async function DELETE(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const params: UpdateProductProps = await request.json()
+    const params: NewAndUpdateServiceProps = await request.json()
     if (!Types.ObjectId.isValid(params.id)) throw new Error('id is not a valid')
     createAndUpdateServiceValidation.parse(params)
-
     await dbConnection()
-
-    const productUpdated = await servicesModel.updateOne({ _id: params.id }, params)
-    return NextResponse.json(productUpdated)
+    const serviceUpdated = await servicesModel.updateOne({ _id: params.id }, params)
+    return NextResponse.json(serviceUpdated)
   } catch (error) {
     return validateErrorResponse(error)
   } finally {

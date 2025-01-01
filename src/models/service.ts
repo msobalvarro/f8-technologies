@@ -5,9 +5,9 @@ export const services = new Schema<ServicesPropierties>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    archived: { type: String, required: false, default: false },
+    archived: { type: Boolean, required: false, default: false },
     images: [String],
-    pinned: { type: String, required: false, default: false },
+    pinned: { type: Boolean, required: false, default: false },
   },
   {
     timestamps: false,
@@ -15,4 +15,4 @@ export const services = new Schema<ServicesPropierties>(
   },
 )
 
-export const servicesModel = models?.service || model('services', services)
+export const servicesModel = models?.services || model('services', services)

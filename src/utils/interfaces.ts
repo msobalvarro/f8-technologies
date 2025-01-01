@@ -75,3 +75,7 @@ export interface ServicesPropierties {
   pinned?: boolean
 }
 
+export interface NewAndUpdateServiceProps extends ServicesPropierties { 
+  id: string
+}
+
