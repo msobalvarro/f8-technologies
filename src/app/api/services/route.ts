@@ -1,9 +1,8 @@
 import { dbConnection } from '@/database'
-import { productModel } from '@/models/products'
 import {
+  NewAndUpdateServiceProps,
   ProductsPropierties,
   ServicesPropierties,
-  UpdateProductProps
 } from '@/utils/interfaces'
 import { NextRequest, NextResponse } from 'next/server'
 import { connection, disconnect, Types } from 'mongoose'
@@ -67,14 +66,12 @@ export async function DELETE(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const params: UpdateProductProps = await request.json()
+    const params: NewAndUpdateServiceProps = await request.json()
     if (!Types.ObjectId.isValid(params.id)) throw new Error('id is not a valid')
     createAndUpdateServiceValidation.parse(params)
-
     await dbConnection()
-
-    const productUpdated = await servicesModel.updateOne({ _id: params.id }, params)
-    return NextResponse.json(productUpdated)
+    const serviceUpdated = await servicesModel.updateOne({ _id: params.id }, params)
+    return NextResponse.json(serviceUpdated)
   } catch (error) {
     return validateErrorResponse(error)
   } finally {
