@@ -69,8 +69,9 @@ export interface ArchiveMessageProp {
 
 export interface ServicesPropierties { 
   title: string
-  descriptions: string  
+  description: string  
   images: string[]
   archived?: boolean
+  pinned?: boolean
 }
 

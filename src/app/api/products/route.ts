@@ -1,7 +1,6 @@
 import { dbConnection } from '@/database'
 import { productModel } from '@/models/products'
 import {
-  DeleteProductProps,
   ProductsPropierties,
   UpdateProductProps
 } from '@/utils/interfaces'
@@ -33,6 +32,8 @@ export async function POST(request: NextRequest) {
   try {
     const params: ProductsPropierties = await request.json()
     createAndUpdateProductValidation.parse(params)
+
+    console.log(params)
     await dbConnection()
 
     const newProduct = await productModel.create(params)

@@ -4,8 +4,7 @@ import { resolve } from 'path'
 import { ReadableStream } from 'web-streams-polyfill/ponyfill'
 
 export async function GET(request: NextRequest, { params }: { params: { imageName: string } }) {
-  const { imageName } = params
-  const imagePath = resolve(`${process.env.PUBLIC_FOLDER}/${imageName}`)
+  const imagePath = resolve(`${process.env.PUBLIC_FOLDER}/${params.imageName}`)
   try {
     const fs = await import('fs/promises')
     await fs.access(imagePath)

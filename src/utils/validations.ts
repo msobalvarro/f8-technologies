@@ -50,3 +50,22 @@ export const createMessage = z.object({
   message: z.string({ message: 'message is required' }),
   email: z.string({ message: 'email is required' }).email({ message: 'email format is not valid' }),
 })
+
+
+export const createAndUpdateServiceValidation = z.object({
+  title: z.string({
+    message: 'Title is required (min 3 characters)'
+  }).min(3),
+  description: z.string({
+    message: 'Product description is required (min 3 characters)'
+  }).min(3),
+  images: z.array(
+    z.string({
+      message: 'image param must be string'
+    }),
+    {
+      message: 'images is required'
+    }
+  ),
+  pinned: z.boolean({ message: 'pinned is required' }),
+})
