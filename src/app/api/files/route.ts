@@ -9,11 +9,15 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const file = formData.get('file')
-    if (!(file instanceof File)) throw new Error('No files received')
+
+    if (!file) throw new Error('No files received')
+    if (!(file instanceof File)) throw new Error('Invalid file type')
+
+    // const dataFile = new File(String(file))
 
     // const file: File = isFile ? fileParams : await readFileSync(fileParams, 'utf-8')
-    const buffer = Buffer.from(await file.arrayBuffer())
-    const fileExt = path.extname(file.name).toLocaleLowerCase()
+    const buffer = Buffer.from(await file?.arrayBuffer())
+    const fileExt = path.extname(file?.name).toLocaleLowerCase()
 
     const allowedTypes = /jpeg|jpg|png/
     const extname = allowedTypes.test(fileExt)
@@ -26,7 +30,7 @@ export async function POST(request: NextRequest) {
       mkdirSync(uploadDir, { recursive: true })
     }
 
-    // write file
+    // write filer
     await writeFile(
       path.join(process.cwd(), uploadDir, fileName),
       buffer

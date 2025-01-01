@@ -16,6 +16,8 @@
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "crypto": "^1.0.1",
+    "expo": "^52.0.23",
+    "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
     "next": "15.0.4",
