@@ -3,7 +3,7 @@ import { gradientNavbar } from '../navbar'
 
 export const HeaderMain = () => {
   return (
-    <section className={`w-full p-10 min-h-80 flex flex-col gap-10 ${gradientNavbar}`}>
+    <section className={`w-full md:p-10 p-2 min-h-80 flex flex-col gap-10 ${gradientNavbar}`}>
       <div className='flex flex-col text-center gap-8 items-center'>
         <Image
           src='/logo/logo.png'
@@ -17,8 +17,8 @@ export const HeaderMain = () => {
           alt='logo' />
 
 
-        <h1 className='text-white text-5xl font-bold mx-10'>Especialistas en instalación de CCTV e infraestructura informática.</h1>
-        <p className='text-xl'>
+        <h1 className='text-white md:text-5xl text-2xl font-bold mx-10'>Especialistas en instalación de CCTV e infraestructura informática.</h1>
+        <p className='md:text-xl text-lg'>
           Lideres en tecnlogīa, servicios integrales de control y monitoro
         </p>
 

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const Footer = () => {
   return (
-    <footer className='flex justify-between items-center text-white p-12 w-full'>
+    <footer className='flex flex-col gap-10 md:flex-row justify-between items-center text-white p-12 w-full'>
       <figure>
         <Image
           src='/logo/logo.png'

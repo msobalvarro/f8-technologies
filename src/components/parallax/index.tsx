@@ -19,7 +19,7 @@ export const ParallaxFrames = () => {
 
 
   return (
-    <article className='bg-white h-full'>
+    <article className='bg-white h-full relative'>
       <Image
         alt='Fortinet'
         width={0}
@@ -27,6 +27,14 @@ export const ParallaxFrames = () => {
         sizes='100vw'
         className='object-fit md:h-screen md:w-screen sm:w-screen ms:h-screen'
         src={`/fortinet-frames/ezgif-frame-${imageFrame}.png`} />
+
+      <Image
+        alt='Fortinet'
+        width={0}
+        height={0}
+        sizes='100vw'
+        className='md:w-64 sm:w-16 h-auto top-10 left-10 object-fit absolute'
+        src='/logo/F8_Logo_Basic_Variant.png' />
     </article>
   )
 }

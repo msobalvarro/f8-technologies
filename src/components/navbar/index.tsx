@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const gradientNavbar ='bg-gradient-to-r from-sky-700 to-cyan-600'
 
-const clasess = 'w-full flex md:items-center md:justify-between py-4 px-8 sm:flex-column'
+const clasess = 'w-full flex flex-col md:flex-row md:items-center md:justify-between py-4 px-8 sm:flex-column'
 
 export const NavbarUi = () => {
   return (
@@ -18,7 +18,7 @@ export const NavbarUi = () => {
           src='/logo/F8_Horizontal_Logo.png' />
       </figure>
 
-      <div className='flex gap-6'>
+      <div className='flex gap-6 items-center flex-1 justify-center md:justify-end'>
         <Link className='hover:text-white/50' href='/'>Inicio</Link>
         <Link className='hover:text-white/50' href='/products'>Productos</Link>
         <Link className='hover:text-white/50' href='/services'>Servicios</Link>

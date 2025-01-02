@@ -24,13 +24,12 @@ export const ProductSliderImage = ({ images }: Props) => (
         <Image
           height={0}
           width={0}
-          sizes='512px'
+          // sizes='64px'
+          unoptimized
           style={{
             width: '100%',
-            height: 'auto',
-            maxHeight: 512,
-            objectFit: 'cover',
           }}
+          className='h-96 object-cover'
           src={`/api/images/${image}`}
           alt='image' />
       </div>

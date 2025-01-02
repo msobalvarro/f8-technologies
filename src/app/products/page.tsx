@@ -15,7 +15,7 @@ export default function Products() {
 
   useEffect(() => {
     fetchAction()
-  }, [fetchAction])
+  }, [])
 
   return (
     <UiLayout>
@@ -45,9 +45,9 @@ export default function Products() {
         src='/banner/art-banner-3.png'
         alt='baner' />
 
-      {isLoading && <ProductsSkeletons />}
+      {(!response) && <ProductsSkeletons />}
 
-      <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
+      <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-10 w-full'>
         {response.map(product => !product.archived && (
           <ProductItem key={crypto.randomUUID()} product={product} />
         ))}
