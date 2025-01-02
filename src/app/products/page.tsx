@@ -8,6 +8,7 @@ import { useActionState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import Image from 'next/image'
 import { Skeleton } from '@mui/material'
+import { ProductsSkeletons } from '@/components/card/cardSkeleton'
 
 const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await toast.promise(fetchData('/products'), {
   pending: 'Obteniendo Productos'
@@ -48,12 +49,7 @@ export default function Products() {
         src='/banner/art-banner-3.png'
         alt='baner' />
 
-      {isLoading && (
-        <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
-          <Skeleton className='rounded-xl' height={512} variant='rectangular' />
-          <Skeleton className='rounded-xl' height={512} variant='rectangular' />
-        </article>
-      )}
+      {isLoading && <ProductsSkeletons />}
 
       <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
         <>

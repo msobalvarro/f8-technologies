@@ -1,11 +1,26 @@
+'use client'
+
+import Image from 'next/image'
+import Link from 'next/link'
 import { ProductItem } from '@/components/card'
 import { HeaderMain } from '@/components/header'
 import { UiButton } from '@/components/ui/button'
 import { UiLayout } from '@/components/ui/layout'
-import Image from 'next/image'
-import Link from 'next/link'
+import { fetchData } from '@/utils/fetch'
+import { ProductsPropierties } from '@/utils/interfaces'
+import { useActionState, useEffect } from 'react'
+import { ProductsSkeletons } from '@/components/card/cardSkeleton'
+
+const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await fetchData('/products')
+
 
 export default function Home() {
+  const [response, formAction, isLoading] = useActionState<ProductsPropierties[]>(fetchDataAsync, [])
+
+  useEffect(() => {
+    formAction()
+  }, [formAction])
+
   return (
     <UiLayout>
       <HeaderMain />
@@ -19,22 +34,10 @@ export default function Home() {
         alt='baner' />
 
       <div className='flex flex-col gap-4 items-center p-12'>
-        <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 w-full'>
-          <ProductItem
-            title='Cámara IP Fish Eye 5MP'
-            description='La cámara IP Fish Eye 5MP es un dispositivo avanzado de seguridad con un diseño panorámico que ofrece una visión de 360 grados. Su sensor de 5 megapíxeles garantiza imágenes nítidas y detalladas tanto de día como de noche. Gracias a su tecnología Starlight, proporciona una excelente visión nocturna con una claridad excepcional en condiciones de baja iluminación, cubriendo hasta 10 metros de distancia.'
-            imageUrl='/card/imageCard1.jpg'
-            textButton='Cotizar'
-            href='/'
-          />
+        {isLoading && <ProductsSkeletons />}
 
-          <ProductItem
-            title='Cámara IP 5MP'
-            description='La cámara IP 5MP es un dispositivo de seguridad de alta calidad diseñado para brindar imágenes claras y detalladas en cualquier condición, ideal para vigilancia en exteriores e interiores. Con su sensor de 5 megapíxeles, captura video en alta definición, ofreciendo una excelente resolución para identificar detalles importantes.'
-            imageUrl='/card/imageCard2.jpg'
-            textButton='Cotizar'
-            href='/'
-          />
+        <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 w-full'>
+          {!isLoading && response?.map((product, index) => product.pinned && <ProductItem key={index} product={product} />)}
         </article>
 
         <Link href='/products'>
