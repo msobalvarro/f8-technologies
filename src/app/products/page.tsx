@@ -1,6 +1,6 @@
 'use client'
 
-import { CardItem } from '@/components/card'
+import { ProductItem } from '@/components/card'
 import { UiLayout } from '@/components/ui/layout'
 import { fetchData } from '@/utils/fetch'
 import { ProductsPropierties } from '@/utils/interfaces'
@@ -57,15 +57,8 @@ export default function Products() {
 
       <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
         <>
-          {response.map(product => product.archived && (
-            <CardItem
-              key={crypto.randomUUID()}
-              title={product.name}
-              description={product.description}
-              imageUrl={`/uploads/${product.images[0]}`}
-              textButton='Cotizar'
-              href='/'
-            />
+          {response.map(product => !product.archived && (
+            <ProductItem key={crypto.randomUUID()} product={product} />
           ))}
 
           {/* <CardItem
