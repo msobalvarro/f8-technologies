@@ -5,15 +5,11 @@ import { UiLayout } from '@/components/ui/layout'
 import { fetchData } from '@/utils/fetch'
 import { ProductsPropierties } from '@/utils/interfaces'
 import { useActionState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import Image from 'next/image'
-import { Skeleton } from '@mui/material'
 import { ProductsSkeletons } from '@/components/card/cardSkeleton'
+import Image from 'next/image'
 
-const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await toast.promise(fetchData('/products'), {
-  pending: 'Obteniendo Productos'
-})
 
+const fetchDataAsync = () => fetchData('/products')
 export default function Products() {
   const [response, fetchAction, isLoading] = useActionState<ProductsPropierties[]>(fetchDataAsync, [])
 
@@ -52,27 +48,9 @@ export default function Products() {
       {isLoading && <ProductsSkeletons />}
 
       <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-12 w-full'>
-        <>
-          {response.map(product => !product.archived && (
-            <ProductItem key={crypto.randomUUID()} product={product} />
-          ))}
-
-          {/* <CardItem
-            title='Punto de acceso wifi ubiquiti'
-            description='El punto de acceso WiFi Ubiquiti con tecnología WiFi 6 es una solución avanzada diseñada para ofrecer conexiones inalámbricas de alta velocidad, mayor capacidad y una cobertura más amplia. Equipado con la última generación WiFi 6 (802.11ax), este dispositivo es ideal para hogares, oficinas y espacios comerciales que demandan una red confiable y eficiente.'
-            imageUrl='/card/imageCard3.jpg'
-            textButton='Cotizar'
-            href='/'
-          />
-
-          <CardItem
-            title='Control de acceso con con reconocimiento facial'
-            description='El control de acceso con reconocimiento facial es un sistema de seguridad avanzado diseñado para gestionar entradas y salidas de manera precisa y eficiente mediante la identificación biométrica. Este dispositivo utiliza tecnología de reconocimiento facial para autenticar usuarios en tiempo real, ofreciendo una solución segura, rápida y sin contacto para controlar el acceso a áreas restringidas.'
-            imageUrl='/card/imageCard4.jpg'
-            textButton='Cotizar'
-            href='/'
-          /> */}
-        </>
+        {response.map(product => !product.archived && (
+          <ProductItem key={crypto.randomUUID()} product={product} />
+        ))}
       </article>
 
       <Image

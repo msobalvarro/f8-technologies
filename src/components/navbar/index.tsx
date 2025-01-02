@@ -3,11 +3,19 @@ import Link from 'next/link'
 
 export const gradientNavbar ='bg-gradient-to-r from-sky-700 to-cyan-600'
 
+const clasess = 'w-full flex md:items-center md:justify-between py-4 px-8 sm:flex-column'
+
 export const NavbarUi = () => {
   return (
-    <nav className={`w-full flex items-center justify-between py-4 px-8 ${gradientNavbar}`}>
+    <nav className={`${clasess} ${gradientNavbar}`}>
       <figure>
-        <Image width={200} height={100} alt='logo' src='/logo/F8_Horizontal_Logo.png' />
+        <Image
+          width={0}
+          height={0}
+          sizes='100vw'
+          alt='logo'
+          className='md:w-64 h-auto object-fit'
+          src='/logo/F8_Horizontal_Logo.png' />
       </figure>
 
       <div className='flex gap-6'>
