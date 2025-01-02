@@ -1,9 +1,9 @@
 'use client'
 
-import { ProductItem } from '@/components/card'
+import { ProductItem } from '@/components/products'
 import { UiLayout } from '@/components/ui/layout'
 import { ProductsPropierties } from '@/utils/interfaces'
-import { ProductsSkeletons } from '@/components/card/cardSkeleton'
+import { ProductsSkeletons } from '@/components/products/cardSkeleton'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { fetcher } from '@/hooks'
