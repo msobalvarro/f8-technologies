@@ -10,6 +10,7 @@ import { fetchData } from '@/utils/fetch'
 import { ProductsPropierties } from '@/utils/interfaces'
 import { useActionState, useEffect } from 'react'
 import { ProductsSkeletons } from '@/components/card/cardSkeleton'
+import { ParallaxFrames } from '@/components/parallax'
 
 const fetchDataAsync = async (): Promise<ProductsPropierties[]> => await fetchData('/products')
 
@@ -24,7 +25,6 @@ export default function Home() {
   return (
     <UiLayout>
       <HeaderMain />
-
       <Image
         width={0}
         height={0}
@@ -32,6 +32,9 @@ export default function Home() {
         style={{ width: '100%' }}
         src='/banner/art-banner-2.png'
         alt='baner' />
+
+      <ParallaxFrames />
+
 
       <div className='flex flex-col gap-4 items-center p-12'>
         {isLoading && <ProductsSkeletons />}
