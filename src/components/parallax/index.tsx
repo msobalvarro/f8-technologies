@@ -25,7 +25,7 @@ export const ParallaxFrames = () => {
         width={0}
         height={0}
         sizes='100vw'
-        className='object-fit md:h-screen md:w-screen sm:w-screen ms:h-screen'
+        className='object-fit w-screen'
         src={`/fortinet-frames/ezgif-frame-${imageFrame}.png`} />
 
       <Image
