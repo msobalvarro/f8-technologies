@@ -2,7 +2,7 @@
 
 import phoneCodes from '@/utils/phoneCountries.json'
 import { FormEvent, useState } from 'react'
-import { inputClassNames, InputField } from '../inputField'
+import { inputClassNames, InputField } from '@/components/ui/inputField'
 import { UiButton } from '../ui/button'
 import { FormContactState } from '@/utils/interfaces'
 import { useValidation } from '@/hooks'
@@ -10,7 +10,7 @@ import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '@/utils/fetch'
 
-const defaultState: FormContactState = {
+const initialState: FormContactState = {
   email: '',
   company: '',
   fullName: '',
@@ -22,7 +22,7 @@ export const ContactForm = () => {
   const { validateNumber } = useValidation()
   const [loading, setLoading] = useState(false)
   const [phoneCode, setPhoneCode] = useState<string>('+505')
-  const [dataForm, setDataForm] = useState<FormContactState>(defaultState)
+  const [dataForm, setDataForm] = useState<FormContactState>(initialState)
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -31,7 +31,7 @@ export const ContactForm = () => {
     try {
       await axiosInstance.post('/message', dataForm)
       toast.success('El mensaje ha sido enviado correctamente.')
-      setDataForm(defaultState)
+      setDataForm(initialState)
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(String(error.response?.data))
