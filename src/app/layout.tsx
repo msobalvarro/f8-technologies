@@ -1,8 +1,8 @@
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import type { Metadata } from 'next'
-import { NavbarUi } from '@/components/navbar'
-import { Footer } from '@/components/footer'
+import { NavbarUi } from '@/components/ui/navbar'
+import { Footer } from '@/components/ui/footer'
 import { ToastContainer } from 'react-toastify'
 
 export const metadata: Metadata = {

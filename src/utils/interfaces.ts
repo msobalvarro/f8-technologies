@@ -79,3 +79,7 @@ export interface NewAndUpdateServiceProps extends ServicesPropierties {
   id: string
 }
 
+export interface ServiceResponse extends ServicesPropierties { 
+  _id: string
+}
+

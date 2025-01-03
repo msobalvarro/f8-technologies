@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { gradientNavbar } from '../navbar'
+import { gradientNavbar } from './navbar'
 
 export const HeaderMain = () => {
   return (

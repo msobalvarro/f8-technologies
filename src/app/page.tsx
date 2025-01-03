@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { HeaderMain } from '@/components/header'
+import { HeaderMain } from '@/components/ui/hero'
 import { UiLayout } from '@/components/ui/layout'
 import { ParallaxFrames } from '@/components/parallax'
 import { PreviewProducts } from '@/components/products/previewProducts'
