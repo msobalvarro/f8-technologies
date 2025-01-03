@@ -13,13 +13,10 @@ export const ParallaxFrames = ({ scrollPosition }: Props) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const MAX_SCROLL = ((scrollRef.current?.scrollHeight || 0) + (scrollRef.current?.clientHeight || 0))
 
-  console.log(MAX_SCROLL)
-
   useEffect(() => {
     const scrollFraction = (scrollPosition / MAX_SCROLL) * 2
     const frame = Math.floor(scrollFraction * MAX_FRAMES) || 1
 
-    // console.log(frame)
     if (Math.abs(frame) <= MAX_FRAMES) {
       setFrame(frame.toString().padStart(3, '0'))
     }

@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(product, { status: 200 })
     }
 
-    if (onlyPinned) {
+    if (Boolean(onlyPinned)) {
       const products: ProductsPropierties[] = await productModel.find({ pinned: true }).sort({ createdAt: -1 })
       return NextResponse.json(products, { status: 200 })
     }
@@ -28,6 +28,8 @@ export async function GET(request: NextRequest) {
     const products: ProductsPropierties[] = await productModel.find().sort({ createdAt: -1 })
     return NextResponse.json(products, { status: 200 })
   } catch (error) {
+    console.log(error)
+    
     return NextResponse.json({ error }, { status: 500 })
   } finally {
     await connection.close()

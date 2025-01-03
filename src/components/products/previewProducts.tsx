@@ -8,7 +8,9 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { ProductItem } from './productItem'
 
 export const PreviewProducts = () => {
-  const { data: products, isLoading } = useSWR<ProductsPropierties[]>('api/products', fetcher)
+  const { data: products, isLoading, error } = useSWR<ProductsPropierties[]>('api/products?pinned=true', fetcher)
+
+  if (error) return <p>Ha ocurrido un error: {String(error)}</p>
 
   return (
     <div className='flex flex-col my-10 gap-10 items-center md:p-12 sm:p-2'>
