@@ -1,6 +1,3 @@
-
-
-import Image from 'next/image'
 import { UiButton } from '../ui/button'
 import { ProductsPropierties } from '@/utils/interfaces'
 import { ProductSliderImage } from './slider'

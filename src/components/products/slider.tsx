@@ -3,13 +3,13 @@
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
-import Slider from 'react-slick'
+import Slider, { Settings } from 'react-slick'
 
 interface Props {
   images: string[]
 }
 
-const settings = {
+const settings: Settings = {
   dots: true,
   infinite: true,
   speed: 500,
@@ -37,12 +37,8 @@ export const ProductSliderImage = ({ images }: Props) => {
           <Image
             height={0}
             width={0}
-            // sizes='64px'
             unoptimized
-            style={{
-              width: '100%',
-            }}
-            className='h-96 object-cover'
+            className='h-96 w-full object-cover'
             src={`/api/images/${image}`}
             alt='image' />
         </div>
