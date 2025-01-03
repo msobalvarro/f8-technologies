@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductItem } from '@/components/products'
+import { ProductItem } from '@/components/products/productItem'
 import { UiLayout } from '@/components/ui/layout'
 import { ProductsPropierties } from '@/utils/interfaces'
 import { ProductsSkeletons } from '@/components/products/cardSkeleton'

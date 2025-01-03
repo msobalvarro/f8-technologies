@@ -5,7 +5,7 @@ import { ProductsPropierties } from '@/utils/interfaces'
 import { ProductsSkeletons } from './cardSkeleton'
 import { Button } from '@mui/material'
 import { IoIosArrowForward } from 'react-icons/io'
-import { ProductItem } from '.'
+import { ProductItem } from './productItem'
 
 export const PreviewProducts = () => {
   const { data: products, isLoading } = useSWR<ProductsPropierties[]>('api/products', fetcher)
