@@ -18,7 +18,7 @@ export default function Services() {
       />
 
 
-      <div className='flex flex-col w-full'>
+      <div className='grid md:grid-cols-2 sm:grid-cols-1 w-full p-10 gap-10'>
         {data?.map((service, index) => (<ServiceItem key={index} service={service} />))}
       </div>
     </UiLayout>

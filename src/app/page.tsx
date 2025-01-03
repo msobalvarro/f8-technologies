@@ -6,6 +6,7 @@ import { UiLayout } from '@/components/ui/layout'
 import { ParallaxFrames } from '@/components/parallax'
 import { PreviewProducts } from '@/components/products/previewProducts'
 import { useState } from 'react'
+import { PreviewServices } from '@/components/services/previewServices'
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
@@ -28,6 +29,7 @@ export default function Home() {
 
       <ParallaxFrames scrollPosition={scrollY} />
 
+
       <PreviewProducts />
 
       <Image
@@ -37,6 +39,8 @@ export default function Home() {
         style={{ width: '100%' }}
         src='/banner/art-banner-3.png'
         alt='baner' />
+
+      <PreviewServices />
 
     </UiLayout>
   )
