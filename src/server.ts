@@ -1,7 +1,8 @@
 import next from 'next'
 import { store, setMessageFunction } from './store'
 import { createServer } from 'node:http'
-import { initializeSocket, initSocket } from './utils/socket'
+import { initializeSocket } from './utils/socket'
+import { dbConnection } from './database'
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
@@ -10,11 +11,9 @@ const app = next({ dev, hostname, port })
 const handler = app.getRequestHandler()
 
 app.prepare().then(() => {
+  dbConnection()
   const httpServer = createServer(handler)
   const io = initializeSocket(httpServer)
-
-  // const sendMessae = (data: object) => io.emit('newMessage', data)
-  // store.dispatch(setMessageFunction(sendMessae))
 
   io.on('connection', (socket) => {
     // const token = socket.handshake.auth.token

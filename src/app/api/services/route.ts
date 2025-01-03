@@ -13,14 +13,23 @@ export async function GET(request: NextRequest) {
   try {
     await dbConnection()
     const id = request.nextUrl.searchParams.get('id')
+    const onlyPinned = request.nextUrl.searchParams.get('pinned')
+
+    if (Boolean(onlyPinned)) {
+      const services: ServicesPropierties[] = await servicesModel.find({ pinned: true }).sort({ createdAt: -1 })
+      return NextResponse.json(services, { status: 200 })
+    }
+
     if (id) {
       const product: NewAndUpdateServiceProps | null = await servicesModel.findById(id)
       return NextResponse.json(product, { status: 200 })
-    } else {
-      const products: NewAndUpdateServiceProps[] = await servicesModel.find().sort({ createdAt: -1 })
-      return NextResponse.json(products, { status: 200 })
     }
+
+    const products: NewAndUpdateServiceProps[] = await servicesModel.find().sort({ createdAt: -1 })
+    return NextResponse.json(products, { status: 200 })
   } catch (error) {
+    console.log(error)
+
     return NextResponse.json({ error }, { status: 500 })
   } finally {
     await connection.close()

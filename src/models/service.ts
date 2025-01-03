@@ -10,7 +10,7 @@ export const services = new Schema<ServicesPropierties>(
     pinned: { type: Boolean, required: false, default: false },
   },
   {
-    timestamps: false,
+    timestamps: true,
     versionKey: false,
   },
 )

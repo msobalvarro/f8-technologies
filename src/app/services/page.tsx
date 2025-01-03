@@ -1,28 +1,26 @@
+'use client'
+
+import useSWR from 'swr'
+import { ServiceItem } from '@/components/services/serviceItem'
 import { UiLayout } from '@/components/ui/layout'
-import Image from 'next/image'
+import { UiTitle } from '@/components/ui/title'
+import { fetcher } from '@/hooks'
+import { ServiceResponse } from '@/utils/interfaces'
 
 export default function Services() {
+  const { data } = useSWR<ServiceResponse[]>('api/services', fetcher)
+
   return (
     <UiLayout>
-      <section className='p-10 rounded flex flex-col gap-8 bg-gray-800 shadow-xl'>
-        <div className='flex flex-col items-center gap-2 text-center'>
-          <Image
-            src='/logo/logo.png'
-            width={0}
-            height={0}
-            sizes='128px'
-            style={{
-              width: '128px',
-              height: 'auto',
-            }}
-            alt='logo' />
+      <UiTitle
+        title='Cotiza nuestros servicios'
+        description='Hecha un vistazo a todos nuestros servicios, nos ajustamos a tus necesidades'
+      />
 
-          <h1 className='text-3xl'>Cotiza nuestros servicios</h1>
-          <p className='text-gray-500'>
-            Hecha un vistazo a todos nuestros servicios, nos ajustamos a tus necesidades
-          </p>
-        </div>
-      </section>
+
+      <div className='grid md:grid-cols-2 sm:grid-cols-1 w-full p-10 gap-10'>
+        {data?.map((service, index) => (<ServiceItem key={index} service={service} />))}
+      </div>
     </UiLayout>
   )
 }
