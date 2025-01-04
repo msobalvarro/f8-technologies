@@ -5,15 +5,18 @@ import { HeaderMain } from '@/components/ui/hero'
 import { UiLayout } from '@/components/ui/layout'
 import { ParallaxFrames } from '@/components/parallax'
 import { PreviewProducts } from '@/components/products/previewProducts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PreviewServices } from '@/components/services/previewServices'
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
 
-  document.addEventListener('scroll', () => {
-    setScrollY(window.scrollY)
-  })
+  useEffect(() => {
+    document.addEventListener('scroll', () => {
+      setScrollY(window.scrollY)
+    })
+  }, [])
+
 
   return (
     <UiLayout>
