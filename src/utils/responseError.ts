@@ -10,5 +10,5 @@ export const validateErrorResponse = (error: unknown) => {
     })
   }
 
-  return NextResponse.json({ error: String(error) }, { status: 500 })
+  return NextResponse.json({ error }, { status: 500 })
 }

@@ -17,7 +17,7 @@ export const Footer = () => {
           alt='logo' />
       </figure>
 
-      <div className='flex items-center md:gap-8 sm:text-sm sm:gap-4 xs:text-sm xs:gap-4'>
+      <div className='flex items-center md:gap-8 sm:text-sm gap-4 xs:text-sm xs:gap-4'>
         <p>F8 Technologies {new Date().getFullYear()}</p>
 
         <p>Todos los derechos reservados</p>
