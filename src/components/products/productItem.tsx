@@ -1,6 +1,7 @@
 import { ProductsPropierties } from '@/utils/interfaces'
 import { ProductSliderImage } from './slider'
 import { Button } from '@mui/material'
+import Link from 'next/link'
 
 interface Props {
   product: ProductsPropierties
@@ -22,9 +23,11 @@ export const ProductItem = ({ product }: Props) => {
         </p>
 
         <div className='flex justify-end'>
-          <Button>
-            Cotizar
-          </Button>
+          <Link href={`/contact?product=${product.name}`}>
+            <Button>
+              Cotizar
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
