@@ -15,7 +15,6 @@
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
-    "expo": "^52.0.23",
     "install": "^0.13.0",
     "jose": "^5.9.6",
     "jsonwebtoken": "^9.0.2",
