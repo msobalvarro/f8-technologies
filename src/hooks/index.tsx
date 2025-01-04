@@ -30,7 +30,7 @@ export const useValidation = () => {
 }
 
 
-export const fetcher = async (...args) => {
+export const fetcher = async (...args: [RequestInfo, RequestInit?]) => {
   const response = await fetch(...args)
   return response.json()
 }

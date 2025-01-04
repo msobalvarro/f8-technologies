@@ -22,9 +22,6 @@ export const ParallaxFrames = ({ scrollPosition }: Props) => {
     }
   }, [scrollPosition, MAX_SCROLL])
 
-
-  console.log(imageFrame)
-
   return (
     <article ref={scrollRef} className='bg-white w-full relative overflow-hidden'>
       <Image

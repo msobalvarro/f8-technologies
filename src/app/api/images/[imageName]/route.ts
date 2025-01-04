@@ -3,8 +3,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { resolve } from 'path'
 import { ReadableStream } from 'web-streams-polyfill/ponyfill'
 
-export async function GET(request: NextRequest, { params }: { params: { imageName: string } }) {
-  const imagePath = resolve(`${process.env.PUBLIC_FOLDER}/${params.imageName}`)
+export async function GET(request: NextRequest) {
+  // console.log()
+  const imageName = request.nextUrl.pathname.split('/')[3]
+
+  const imagePath = resolve(`${process.env.PUBLIC_FOLDER}/${imageName}`)
   try {
     const fs = await import('fs/promises')
     await fs.access(imagePath)

@@ -9,7 +9,7 @@ import { useValidation } from '@/hooks'
 import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '@/utils/fetch'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const initialState: FormContactState = {
   email: '',
