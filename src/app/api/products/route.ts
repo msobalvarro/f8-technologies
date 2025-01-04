@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Types } from 'mongoose'
 import { createAndUpdateProductValidation } from '@/utils/validations'
 import { validateErrorResponse } from '@/utils/responseError'
+import { verifyHeaderToken } from '@/utils/validateToken'
 
 export async function GET(request: NextRequest) {
   try {
@@ -34,10 +35,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: ProductsPropierties = await request.json()
     createAndUpdateProductValidation.parse(params)
-
-    console.log(params)
 
     const newProduct = await productModel.create(params)
     return NextResponse.json(newProduct)
@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 
@@ -63,6 +64,7 @@ export async function DELETE(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: UpdateProductProps = await request.json()
     const data = createAndUpdateProductValidation.parse(params)
     if (!Types.ObjectId.isValid(params.id)) throw new Error('id is not a valid')

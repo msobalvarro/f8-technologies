@@ -1,10 +1,19 @@
 import { jwtVerify, SignJWT } from 'jose'
+import { NextRequest } from 'next/server'
 
+export async function verifyHeaderToken(request: NextRequest) {
+  const authHeader = request.headers.get('Authorization')
+  if (!authHeader) throw new Error('No token provided')
+  const auth = await asyncvalidateToken(`${authHeader}`)
 
+  if (auth) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (request as any).user = auth
+  }
+}
 
 export async function asyncvalidateToken(authToken: string) {
   const token: string = authToken.split(' ')[1]
-
   const secret = new TextEncoder().encode(process.env.JWT_SECRET?.trim())
   const data = await jwtVerify(token, secret, {
     algorithms: ['HS256']

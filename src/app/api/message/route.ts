@@ -5,9 +5,12 @@ import { createMessage } from '@/utils/validations'
 import { messageModel } from '@/models/messages'
 import { ZodError } from 'zod'
 import { getSocket } from '@/utils/socket'
+import { verifyHeaderToken } from '@/utils/validateToken'
+import { validateErrorResponse } from '@/utils/responseError'
 
 export async function POST(request: NextRequest) {
   try {
+    // await verifyHeaderToken(request)
     const params: MessagesPropierties = await request.json()
     const data = createMessage.parse(params)
 
@@ -17,29 +20,26 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(newMessage, { status: 200 })
   } catch (error) {
-    if (error instanceof ZodError) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    } else {
-      return NextResponse.json({ error }, { status: 500 })
-    }
+    return validateErrorResponse(error)
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
 
     const archived = request.nextUrl.searchParams.get('archived') === 'true'
     const data = await messageModel.find({ archived }).sort({ createdAt: -1 })
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
-    console.log(error)
-
-    return NextResponse.json({ error }, { status: 500 })
+    return validateErrorResponse(error)
   }
 }
 
 export async function PUT(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
+
     const { _id }: ArchiveMessageProp = await request.json()
 
     const message = await messageModel.findById(_id)
@@ -51,19 +51,20 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json(messageUpdated, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+    return validateErrorResponse(error)
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const { _id }: ArchiveMessageProp = await request.json()
 
     const deleted = await messageModel.deleteOne({ _id })
 
     return NextResponse.json(deleted, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
+    return validateErrorResponse(error)
   }
 }
 

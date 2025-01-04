@@ -7,6 +7,7 @@ import { Types } from 'mongoose'
 import { createAndUpdateServiceValidation } from '@/utils/validations'
 import { validateErrorResponse } from '@/utils/responseError'
 import { servicesModel } from '@/models/service'
+import { verifyHeaderToken } from '@/utils/validateToken'
 
 export async function GET(request: NextRequest) {
   try {
@@ -34,6 +35,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: ServicesPropierties = await request.json()
     createAndUpdateServiceValidation.parse(params)
 
@@ -46,6 +48,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 
@@ -61,6 +64,7 @@ export async function DELETE(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: NewAndUpdateServiceProps = await request.json()
     if (!Types.ObjectId.isValid(params.id)) throw new Error('id is not a valid')
     createAndUpdateServiceValidation.parse(params)

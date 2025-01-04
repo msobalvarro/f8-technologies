@@ -2,11 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { existsSync, mkdirSync } from 'fs'
 import { writeFile } from 'fs/promises'
 import path from 'path'
+import { verifyHeaderToken } from '@/utils/validateToken'
 
 const uploadDir = <string>process.env.PUBLIC_FOLDER
 
 export async function POST(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const formData = await request.formData()
     const file = formData.get('file')
 
