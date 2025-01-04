@@ -29,8 +29,7 @@ export default function Home() {
 
       <ParallaxFrames scrollPosition={scrollY} />
 
-
-      <PreviewProducts />
+      <PreviewServices />
 
       <Image
         width={0}
@@ -40,7 +39,7 @@ export default function Home() {
         src='/banner/art-banner-3.png'
         alt='baner' />
 
-      <PreviewServices />
+      <PreviewProducts />
 
     </UiLayout>
   )

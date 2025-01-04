@@ -4,16 +4,12 @@ import Link from 'next/link'
 export const Footer = () => {
   return (
     <footer className='flex flex-col gap-10 md:flex-row justify-between items-center text-white p-12 w-full'>
-      <figure>
+      <figure className='bg-white p-6 rounded-full w-32 h-32 flex items-center justify-center'>
         <Image
-          src='/logo/logo.png'
-          width={0}
-          height={0}
-          sizes='86px'
-          style={{
-            width: '86px',
-            height: 'auto',
-          }}
+          src='/logo/F8_Logo_Basic_Variant.png'
+          width={64}
+          height={64}
+          sizes='64px'
           alt='logo' />
       </figure>
 
