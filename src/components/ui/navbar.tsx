@@ -17,17 +17,19 @@ const routes = [
 
 export const NavbarUi = () => {
   const pathname = usePathname()
-  
+
   return (
     <nav className={`${clasess} ${gradientNavbar}`}>
       <figure>
-        <Image
-          width={0}
-          height={0}
-          sizes='100vw'
-          alt='logo'
-          className='md:w-64 h-auto object-fit'
-          src='/logo/F8_Horizontal_Logo.png' />
+        <Link href='/'>
+          <Image
+            width={0}
+            height={0}
+            sizes='100vw'
+            alt='logo'
+            className='md:w-64 h-auto object-fit'
+            src='/logo/F8_Horizontal_Logo.png' />
+        </Link>
       </figure>
 
       <div className='flex gap-6 items-center flex-1 justify-center md:justify-end'>

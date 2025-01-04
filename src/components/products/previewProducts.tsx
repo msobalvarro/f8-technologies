@@ -18,7 +18,7 @@ export const PreviewProducts = () => {
 
       {(isLoading && !products) && <ProductsSkeletons />}
 
-      <article className='grid md:grid-cols-2 sm:grid-cols-1 gap-10 w-full'>
+      <article className='grid md:grid-cols-2 p-1 md:p-0 sm:grid-cols-1 gap-10 w-full'>
         {!isLoading && (products || [])?.map((product, index) => product.pinned && <ProductItem key={index} product={product} />)}
       </article>
 

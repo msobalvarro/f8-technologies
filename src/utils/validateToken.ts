@@ -1,17 +1,38 @@
-import { JwtPayload, verify, sign } from 'jsonwebtoken'
-import { createHash } from 'node:crypto'
+import { jwtVerify, SignJWT } from 'jose'
+import { NextRequest } from 'next/server'
 
-const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key'
+export async function verifyHeaderToken(request: NextRequest) {
+  const authHeader = request.headers.get('Authorization')
+  if (!authHeader) throw new Error('No token provided')
+  const auth = await asyncvalidateToken(`${authHeader}`)
 
-export function validateToken(authToken: string): JwtPayload | string {  
-  const token: string | JwtPayload = authToken.split(' ')[1]
-  const decoded: JwtPayload | string = verify(token, SECRET_KEY) as JwtPayload
-
-  return decoded
+  if (auth) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (request as any).user = auth
+  }
 }
 
-export function generateToken(data: object): string {
-  return sign(data, SECRET_KEY, { expiresIn: '24h' })
+export async function asyncvalidateToken(authToken: string) {
+  const token: string = authToken.split(' ')[1]
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET?.trim())
+  const data = await jwtVerify(token, secret, {
+    algorithms: ['HS256']
+  })
+
+  return data.payload
 }
 
-export const newSha256 = (data: string): string => createHash('sha256').update(data).digest('hex')
+export async function generateToken(data: object) {
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET?.trim())
+  const token = await new SignJWT({ ...data })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('100h')
+    .sign(secret)
+
+  return token
+}
+
+// export const newSha256 = (data: string): string => createHash('sha256').update(data).digest('hex')
+export const newSha256 = (data: string): string => data
+// export const newSha256 = async (data: string): Promise<string> => await argon2.hash(data)

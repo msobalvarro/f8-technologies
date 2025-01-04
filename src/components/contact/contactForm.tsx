@@ -9,6 +9,7 @@ import { useValidation } from '@/hooks'
 import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '@/utils/fetch'
+import { useParams, useSearchParams } from 'next/navigation'
 
 const initialState: FormContactState = {
   email: '',
@@ -19,10 +20,17 @@ const initialState: FormContactState = {
 }
 
 export const ContactForm = () => {
+  const params = useSearchParams()
+  const customMessageProduct = params.get('product')
   const { validateNumber } = useValidation()
   const [loading, setLoading] = useState(false)
   const [phoneCode, setPhoneCode] = useState<string>('+505')
-  const [dataForm, setDataForm] = useState<FormContactState>(initialState)
+  const [dataForm, setDataForm] = useState<FormContactState>({
+    ...initialState,
+    ...(customMessageProduct && {
+      message: `Me gustaria saber el precio del producto ${customMessageProduct}`
+    })
+  })
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()

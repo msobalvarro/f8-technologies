@@ -1,17 +1,16 @@
-import { dbConnection } from '@/database'
 import { productModel } from '@/models/products'
 import {
   ProductsPropierties,
   UpdateProductProps
 } from '@/utils/interfaces'
 import { NextRequest, NextResponse } from 'next/server'
-import { connection, disconnect, Types } from 'mongoose'
+import { Types } from 'mongoose'
 import { createAndUpdateProductValidation } from '@/utils/validations'
 import { validateErrorResponse } from '@/utils/responseError'
+import { verifyHeaderToken } from '@/utils/validateToken'
 
 export async function GET(request: NextRequest) {
   try {
-    await dbConnection()
     const id = request.nextUrl.searchParams.get('id')
     const onlyPinned = request.nextUrl.searchParams.get('pinned')
 
@@ -31,53 +30,45 @@ export async function GET(request: NextRequest) {
     console.log(error)
     
     return NextResponse.json({ error }, { status: 500 })
-  } finally {
-    await connection.close()
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: ProductsPropierties = await request.json()
     createAndUpdateProductValidation.parse(params)
-
-    console.log(params)
-    await dbConnection()
 
     const newProduct = await productModel.create(params)
     return NextResponse.json(newProduct)
   } catch (error) {
     return validateErrorResponse(error)
-  } finally {
-    await disconnect()
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 
     if (!id || !Types.ObjectId.isValid(id)) throw new Error('id is not a valid')
 
-    await dbConnection()
 
     const deleted = await productModel.deleteOne({ _id: id })
     return NextResponse.json(deleted)
   } catch (error) {
     return validateErrorResponse(error)
-  } finally {
-    await disconnect()
   }
 }
 
 export async function PUT(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: UpdateProductProps = await request.json()
     const data = createAndUpdateProductValidation.parse(params)
     if (!Types.ObjectId.isValid(params.id)) throw new Error('id is not a valid')
 
-    await dbConnection()
 
     const productUpdated = await productModel.updateOne(
       { _id: params.id },
@@ -92,7 +83,5 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(productUpdated)
   } catch (error) {
     return validateErrorResponse(error)
-  } finally {
-    await disconnect()
   }
 }

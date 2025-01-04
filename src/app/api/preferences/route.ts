@@ -1,6 +1,4 @@
-import { dbConnection } from '@/database'
 import { NextRequest, NextResponse } from 'next/server'
-import { connection } from 'mongoose'
 import { preferencesModel } from '@/models/preferences'
 import {
   DeletePreferencesProp,
@@ -12,61 +10,54 @@ import {
   deletePreferenceValidation,
   updatePreferenceValidation
 } from '@/utils/validations'
+import { verifyHeaderToken } from '@/utils/validateToken'
+import { validateErrorResponse } from '@/utils/responseError'
 
 export async function GET() {
   try {
-    await dbConnection()
     const data = await preferencesModel.find()
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
-  } finally {
-    await connection.close()
+    return validateErrorResponse(error)
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: PreferencesPropierties = await request.json()
     const data = createPreferenceValidation.parse(params)
 
-    await dbConnection()
     const newPreference = await preferencesModel.create(data)
     return NextResponse.json(newPreference, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
-  } finally {
-    await connection.close()
+    return validateErrorResponse(error)
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: DeletePreferencesProp = await request.json()
     const data = deletePreferenceValidation.parse(params)
 
-    await dbConnection()
     const newPreference = await preferencesModel.deleteOne({ _id: data._id })
     return NextResponse.json(newPreference, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
-  } finally {
-    await connection.close()
+    return validateErrorResponse(error)
   }
 }
 
 
 export async function PUT(request: NextRequest) {
   try {
+    await verifyHeaderToken(request)
     const params: UpdatePreferencesProp = await request.json()
     const data = updatePreferenceValidation.parse(params)
 
-    await dbConnection()
     const preferenceUpdated = await preferencesModel.updateOne({ _id: data._id }, { key: data.key, value: data.value })
     return NextResponse.json(preferenceUpdated, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
-  } finally {
-    await connection.close()
+    return validateErrorResponse(error)
   }
 }
